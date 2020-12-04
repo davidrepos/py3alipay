@@ -33,7 +33,7 @@ class Alipay(object):
                 }
     def _generate_md5_sign(self,params):
         src = '&'.join(['%s=%s' % (key,value) for key,value in sorted(params.items())])+self.key
-        return md5(src)
+        return md5(src.encode('utf-8')).hexdigest()
 
     def _check_params(self,params,names):
         if not all(k in params for k in names):
