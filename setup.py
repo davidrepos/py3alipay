@@ -6,7 +6,7 @@ from setuptools import find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = io.open(os.path.join(here, 'README.md'), encoding='UTF-8').read()
-CHANGES = io.open(os.path.join(here, 'CHANGES.md'), encoding='UTF-8').read()
+CHANGES = io.open(os.path.join(here, 'README.md'), encoding='UTF-8').read()
 
 setup(name='alipay',
       version='0.7.4',
