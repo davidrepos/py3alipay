@@ -1,6 +1,6 @@
 from hashlib import md5
 from urllib.parse import urlencode
-from exceptions import AlipayExcepton,ParameterValueErrorException,MissingParameterException,TokenAuthorizationErrorException
+from .exceptions import AlipayExcepton,ParameterValueErrorException,MissingParameterException,TokenAuthorizationErrorException
 
 class Alipay(object):
     GATEWAY_URL = 'https://mapi.alipay.com/gateway.do'
