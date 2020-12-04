@@ -25,4 +25,5 @@ class AlipayTests(unittest.TestCase):
         #act
         url =self.alipay.create_direct_pay_by_user_url(**params)
         self.assertIn('create_direct_pay_by_user',url)
+
         

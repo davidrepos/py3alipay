@@ -1,6 +1,7 @@
 from hashlib import md5
 from urllib.parse import urlencode
-from .exceptions import AlipayExcepton,ParameterValueErrorException,MissingParameterException,TokenAuthorizationErrorException
+from exceptions import AlipayExcepton,ParameterValueErrorException,MissingParameterException,TokenAuthorizationErrorException
+
 class Alipay(object):
     GATEWAY_URL = 'https://mapi.alipay.com/gateway.do'
 
@@ -24,13 +25,8 @@ class Alipay(object):
         else:
             raise MissingParameterException('missing parameter seller_id or seller_email')
 
-    def _decode_params(self,params):
-        return {
-                    k:v.encode('utf-8')
-                    if isinstance(v,str) 
-                    else v.encode('utf-8')
-                    for k,v in params
-                }
+    def encode_dict(self,params):
+        return {k: str(v).encode('utf-8') for k, v in params.items()}
     def _generate_md5_sign(self,params):
         src = '&'.join(['%s=%s' % (key,value) for key,value in sorted(params.items())])+self.key
         return md5(src.encode('utf-8')).hexdigest()
@@ -56,7 +52,7 @@ class Alipay(object):
         if self.sign_key:
             params.update({signkey,signvalue})
         params.update({signkey:signvalue,'sign':signmethod(params)})
-        return '%s?%s' % (self.GATEWAY_URL,urlencode(self._decode_params(params)))
+        return '%s?%s' % (self.GATEWAY_URL,urlencode(self.encode_dict(params)))
         
     def create_direct_pay_by_user_url(self,**kw):
         self._check_params(kw,('out_trade_no','subject'))
