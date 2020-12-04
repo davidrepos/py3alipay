@@ -1,4 +1,8 @@
-
+class AlipayExcepton(Exception):
+    '''
+    Base Alipay Exception
+    '''
+    pass
 
 class MissingParameterException(AlipayExcepton):
     '''

@@ -3,7 +3,7 @@ from urllib.parse import parse_qs,urlparse
 
 class AlipayTests(unittest.TestCase):
     def Alipay(self, *a, **kw):
-        from payment import Alipay
+        from .payment import Alipay
         return Alipay(*a, **kw)
 
     def setUp(self):
